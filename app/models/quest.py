@@ -1,7 +1,7 @@
 import enum
 import uuid
 
-from sqlalchemy import JSON, Column, DateTime, Enum, ForeignKey, String, func
+from sqlalchemy import JSON, Column, DateTime, Enum, ForeignKey, String, func, Float
 from sqlalchemy.dialects.postgresql import UUID
 
 from app.core.database import Base
@@ -23,6 +23,8 @@ class Quest(Base):
     title = Column(String)
     description = Column(String)
     location = Column(String)
+    longitude = Column(Float, nullable=False)  # Longitude of the location
+    latitude = Column(Float, nullable=False)  # Latitude of the location
     time_window = Column(JSON)  # Store start and end times as JSON
     rewards = Column(JSON)      # Store EXP and items as JSON
     status = Column(Enum(QuestStatus), default=QuestStatus.available)

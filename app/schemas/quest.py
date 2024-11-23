@@ -22,6 +22,23 @@ class QuestStatus(str, Enum):
     cancelled = "cancelled"
 
 
+class Location(BaseModel):
+    """
+    Represents a geographic location with longitude and latitude.
+
+    Example:
+        {
+            "longitude": 34.052235,
+            "latitude": -118.243683
+        }
+    """
+    longitude: float = Field(..., example=34.052235, description="Longitude of the location")
+    latitude: float = Field(..., example=-118.243683, description="Latitude of the location")
+
+    class Config:
+        orm_mode = True
+
+
 class TimeWindow(BaseModel):
     """
     Represents the time window for a quest.
@@ -61,7 +78,10 @@ class QuestBase(BaseModel):
         {
             "title": "Defeat the Dragon",
             "description": "Slay the dragon terrorizing the village.",
-            "location": "Dragon's Lair",
+            "location": {
+                "longitude": 34.052235,
+                "latitude": -118.243683
+            },
             "time_window": {
                 "start_time": "2023-01-20T08:00:00Z",
                 "end_time": "2023-01-20T18:00:00Z"
@@ -74,7 +94,7 @@ class QuestBase(BaseModel):
     """
     title: str = Field(..., example="Defeat the Dragon")
     description: str = Field(..., example="Slay the dragon terrorizing the village.")
-    location: str = Field(..., example="Dragon's Lair")
+    location: Location
     time_window: TimeWindow
     rewards: Rewards
 
@@ -91,7 +111,10 @@ class QuestCreate(QuestBase):
             "creator_wallet": "0xabcdefabcdefabcdefabcdefabcdefabcdef",
             "title": "Defeat the Dragon",
             "description": "Slay the dragon terrorizing the village.",
-            "location": "Dragon's Lair",
+            "location": {
+                "longitude": 34.052235,
+                "latitude": -118.243683
+            },
             "time_window": {
                 "start_time": "2023-01-20T08:00:00Z",
                 "end_time": "2023-01-20T18:00:00Z"
@@ -114,7 +137,10 @@ class QuestUpdate(BaseModel):
             "participant_wallet": "0x1234567890abcdef1234567890abcdef12345678",
             "title": "Defeat the Dragon Quickly",
             "description": "Slay the dragon before sunset.",
-            "location": "Dragon's Lair",
+            "location": {
+                "longitude": 34.052235,
+                "latitude": -118.243683
+            },
             "time_window": {
                 "start_time": "2023-01-20T06:00:00Z",
                 "end_time": "2023-01-20T12:00:00Z"
@@ -129,7 +155,7 @@ class QuestUpdate(BaseModel):
     participant_wallet: Optional[str] = Field(None, example="0x1234567890abcdef1234567890abcdef12345678")
     title: Optional[str] = Field(None, example="Defeat the Dragon Quickly")
     description: Optional[str] = Field(None, example="Slay the dragon before sunset.")
-    location: Optional[str] = Field(None, example="Dragon's Lair")
+    location: Optional[Location] = None
     time_window: Optional[TimeWindow] = None
     rewards: Optional[Rewards] = None
     status: Optional[QuestStatus] = Field(None, example="in_progress")
@@ -149,7 +175,10 @@ class QuestRead(QuestBase):
             "participant_wallet": "0x1234567890abcdef1234567890abcdef12345678",
             "title": "Defeat the Dragon",
             "description": "Slay the dragon terrorizing the village.",
-            "location": "Dragon's Lair",
+            "location": {
+                "longitude": 34.052235,
+                "latitude": -118.243683
+            },
             "time_window": {
                 "start_time": "2023-01-20T08:00:00Z",
                 "end_time": "2023-01-20T18:00:00Z"
