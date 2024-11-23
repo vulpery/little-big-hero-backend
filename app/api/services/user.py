@@ -16,13 +16,6 @@ class UserService:
     def get_user(db: Session, wallet_address: str) -> Optional[UserModel]:
         """
         Retrieve a user by wallet address.
-
-        Args:
-            db (Session): Database session.
-            wallet_address (str): User's wallet address.
-
-        Returns:
-            Optional[UserModel]: User model instance or None if not found.
         """
         return UserRepository.get_user(db, wallet_address)
 
@@ -30,16 +23,6 @@ class UserService:
     def create_user(db: Session, user_create: UserCreate) -> UserModel:
         """
         Create a new user.
-
-        Args:
-            db (Session): Database session.
-            user_create (UserCreate): Data for creating a new user.
-
-        Returns:
-            UserModel: The newly created user model instance.
-
-        Raises:
-            ValueError: If the user already exists.
         """
         existing_user = UserRepository.get_user(db, user_create.wallet_address)
         if existing_user:
@@ -50,14 +33,6 @@ class UserService:
     def update_user(db: Session, wallet_address: str, user_update: UserUpdate) -> Optional[UserModel]:
         """
         Update an existing user.
-
-        Args:
-            db (Session): Database session.
-            wallet_address (str): User's wallet address.
-            user_update (UserUpdate): Data for updating the user.
-
-        Returns:
-            Optional[UserModel]: Updated user model instance or None if not found.
         """
         db_user = UserRepository.get_user(db, wallet_address)
         if not db_user:
@@ -68,13 +43,6 @@ class UserService:
     def delete_user(db: Session, wallet_address: str) -> bool:
         """
         Delete a user.
-
-        Args:
-            db (Session): Database session.
-            wallet_address (str): User's wallet address.
-
-        Returns:
-            bool: True if deletion was successful, False otherwise.
         """
         db_user = UserRepository.get_user(db, wallet_address)
         if not db_user:

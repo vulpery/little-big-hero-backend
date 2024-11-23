@@ -24,7 +24,7 @@ class AvatarRepository:
         Returns:
             Optional[AvatarModel]: Avatar model instance or None if not found.
         """
-        return db.query(AvatarModel).filter(operator.eq(AvatarModel.wallet_address, wallet_address)).first()
+        return db.query(AvatarModel).filter(AvatarModel.wallet_address == wallet_address).first()
 
     @staticmethod
     def create_avatar(db: Session, avatar_create: AvatarCreate) -> AvatarModel:

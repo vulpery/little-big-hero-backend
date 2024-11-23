@@ -24,7 +24,7 @@ class ItemRepository:
         Returns:
             Optional[ItemModel]: Item model instance or None if not found.
         """
-        return db.query(ItemModel).filter(operator.eq(ItemModel.item_id, item_id)).first()
+        return db.query(ItemModel).filter(ItemModel.item_id == item_id).first()
 
     @staticmethod
     def create_item(db: Session, item_create: ItemCreate) -> ItemModel:

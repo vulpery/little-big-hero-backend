@@ -35,6 +35,9 @@ class TimeWindow(BaseModel):
     start_time: datetime = Field(..., example="2023-01-15T09:00:00Z")
     end_time: datetime = Field(..., example="2023-01-15T17:00:00Z")
 
+    class Config:
+        orm_mode = True
+
 
 class Rewards(BaseModel):
     """
@@ -74,6 +77,9 @@ class QuestBase(BaseModel):
     location: str = Field(..., example="Dragon's Lair")
     time_window: TimeWindow
     rewards: Rewards
+
+    class Config:
+        orm_mode = True
 
 
 class QuestCreate(QuestBase):
@@ -128,6 +134,9 @@ class QuestUpdate(BaseModel):
     rewards: Optional[Rewards] = None
     status: Optional[QuestStatus] = Field(None, example="in_progress")
 
+    class Config:
+        orm_mode = True
+
 
 class QuestRead(QuestBase):
     """
@@ -160,6 +169,10 @@ class QuestRead(QuestBase):
     status: QuestStatus = Field(..., example="available")
     created_at: Optional[datetime] = Field(None, example="2023-01-10T10:00:00Z")
     updated_at: Optional[datetime] = Field(None, example="2023-01-12T12:00:00Z")
+
+    class Config:
+        orm_mode = True
+        json_encoders = {datetime: lambda v: v.isoformat()}
 
 
 class QuestDelete(BaseModel):

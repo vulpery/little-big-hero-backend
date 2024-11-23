@@ -1,4 +1,5 @@
 import enum
+import uuid
 
 from sqlalchemy import JSON, Column, DateTime, Enum, ForeignKey, String, func
 from sqlalchemy.dialects.postgresql import UUID
@@ -16,7 +17,7 @@ class QuestStatus(enum.Enum):
 class Quest(Base):
     __tablename__ = 'quests'
 
-    quest_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    quest_id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     creator_wallet = Column(String, ForeignKey('users.wallet_address'))
     participant_wallet = Column(String, ForeignKey('users.wallet_address'), nullable=True)
     title = Column(String)

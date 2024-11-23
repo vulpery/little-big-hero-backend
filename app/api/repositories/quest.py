@@ -25,7 +25,7 @@ class QuestRepository:
         Returns:
             Optional[QuestModel]: Quest model instance or None if not found.
         """
-        return db.query(QuestModel).filter(operator.eq(QuestModel.quest_id,quest_id)).first()
+        return db.query(QuestModel).filter(QuestModel.quest_id == quest_id).first()
 
     @staticmethod
     def create_quest(db: Session, quest_create: QuestCreate) -> QuestModel:
@@ -39,7 +39,12 @@ class QuestRepository:
         Returns:
             QuestModel: The newly created quest model instance.
         """
-        db_quest = QuestModel(**quest_create.dict())
+
+        quest_data = quest_create.dict()
+        quest_data["time_window"]["start_time"] = quest_data["time_window"]["start_time"].isoformat()
+        quest_data["time_window"]["end_time"] = quest_data["time_window"]["end_time"].isoformat()
+
+        db_quest = QuestModel(**quest_data)
         db.add(db_quest)
         db.commit()
         db.refresh(db_quest)
