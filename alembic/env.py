@@ -14,7 +14,7 @@ config = context.config
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 POSTGRES_DB = os.getenv("POSTGRES_DB")
-config.set_main_option('sqlalchemy.url', f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:5432/{POSTGRES_DB}")
+config.set_main_option('sqlalchemy.url', f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@little-big-hero-db:5432/{POSTGRES_DB}")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
