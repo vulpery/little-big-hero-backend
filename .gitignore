@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+
+# venv
+.venv/
+venv/
+env/
+.env
+
+# custom
+.poetry.lock
