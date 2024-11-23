@@ -12,3 +12,5 @@ env/
 
 # custom
 .poetry.lock
+.idea
+.ruff_cache
