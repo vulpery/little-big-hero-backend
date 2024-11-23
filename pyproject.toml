@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "little-big-hero-backend"
+version = "0.1.0"
+description = ""
+authors = ["Huu Tung Nguyen <tung.nguyen97@outlook.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = { version = "^0.115.5", extras = ["standard"] }
+uvicorn = "^0.32.1"
+psycopg2-binary = "^2.9.10"
+sqlalchemy = "^2.0.36"
+alembic = "^1.14.0"
+python-dotenv = "^1.0.1"
+pydantic = "^2.10.1"
+
+pydantic-settings = "^2.6.1"
+asyncpg = "^0.30.0"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.1"
+ruff = "^0.5.5"
+
+[tool.ruff.lint]
+select = ["A", "C4", "E", "F", "I", "ICN", "UP", "T20", "W"]
+ignore = [
+    "E501",
+    "F403",
+    "F405"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"sec_tester.py" = ["T20"]
