@@ -41,9 +41,6 @@ class QuestRepository:
         """
 
         quest_data = quest_create.dict()
-        quest_data["time_window"]["start_time"] = quest_data["time_window"]["start_time"].isoformat()
-        quest_data["time_window"]["end_time"] = quest_data["time_window"]["end_time"].isoformat()
-
         db_quest = QuestModel(**quest_data)
         db.add(db_quest)
         db.commit()

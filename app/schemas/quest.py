@@ -94,11 +94,13 @@ class QuestBase(BaseModel):
     """
     title: str = Field(..., example="Defeat the Dragon")
     description: str = Field(..., example="Slay the dragon terrorizing the village.")
-    location: Location
-    time_window: TimeWindow
-    rewards: Rewards
+    longitude: float = Field(..., example=34.052235)
+    latitude: float = Field(..., example=-118.243683)
+    time_window: dict = Field(..., example={"start_time": "2023-01-15T09:00:00Z", "end_time": "2023-01-15T17:00:00Z"})
+    rewards: dict = Field(..., example={"experience_points": 500, "items": ["sword_of_truth", "shield_of_valor"]})
 
-    class Config:
+
+class Config:
         orm_mode = True
 
 
