@@ -28,6 +28,19 @@ class QuestRepository:
         return db.query(QuestModel).filter(QuestModel.quest_id == quest_id).first()
 
     @staticmethod
+    def get_quests(db: Session) -> list[QuestModel]:
+        """
+        Retrieve all quests.
+
+        Args:
+            db (Session): Database session.
+
+        Returns:
+            list[QuestModel]: List of all quest model instances.
+        """
+        return db.query(QuestModel).all()
+    
+    @staticmethod
     def create_quest(db: Session, quest_create: QuestCreate) -> QuestModel:
         """
         Create a new quest.

@@ -33,8 +33,18 @@ def read_user(wallet_address: str, db: Session = Depends(get_db)):
     return db_user
 
 
+@router.get("/", response_model=list[UserRead])
+def read_users(db: Session = Depends(get_db)):
+    """
+    Retrieve all users.
+    """
+    return UserService.get_users(db)
+
+
 @router.put("/{wallet_address}", response_model=UserRead)
-def update_user(wallet_address: str, user_update: UserUpdate, db: Session = Depends(get_db)):
+def update_user(
+    wallet_address: str, user_update: UserUpdate, db: Session = Depends(get_db)
+):
     """
     Update an existing user's information.
     """

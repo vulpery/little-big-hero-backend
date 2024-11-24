@@ -24,6 +24,13 @@ class UserRepository:
         )
 
     @staticmethod
+    def get_users(db: Session) -> list[UserModel]:
+        """
+        Retrieve all users.
+        """
+        return db.query(UserModel).all()
+
+    @staticmethod
     def create_user(db: Session, user_create: UserCreate) -> UserModel:
         """
         Create a new user.
@@ -35,7 +42,9 @@ class UserRepository:
         return db_user
 
     @staticmethod
-    def update_user(db: Session, db_user: UserModel, user_update: UserUpdate) -> UserModel:
+    def update_user(
+        db: Session, db_user: UserModel, user_update: UserUpdate
+    ) -> UserModel:
         """
         Update an existing user.
         """

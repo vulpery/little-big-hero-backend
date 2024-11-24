@@ -19,6 +19,12 @@ class UserService:
         """
         return UserRepository.get_user(db, wallet_address)
 
+    def get_users(db: Session) -> list[UserModel]:
+        """
+        Retrieve all users.
+        """
+        return UserRepository.get_users(db)
+
     @staticmethod
     def create_user(db: Session, user_create: UserCreate) -> UserModel:
         """
@@ -30,7 +36,9 @@ class UserService:
         return UserRepository.create_user(db, user_create)
 
     @staticmethod
-    def update_user(db: Session, wallet_address: str, user_update: UserUpdate) -> Optional[UserModel]:
+    def update_user(
+        db: Session, wallet_address: str, user_update: UserUpdate
+    ) -> Optional[UserModel]:
         """
         Update an existing user.
         """

@@ -26,6 +26,19 @@ class QuestService:
             Optional[QuestModel]: Quest model instance or None if not found.
         """
         return QuestRepository.get_quest(db, quest_id)
+    
+    @staticmethod
+    def get_quests(db: Session) -> list[QuestModel]:
+        """
+        Retrieve all quests.
+
+        Args:
+            db (Session): Database session.
+
+        Returns:
+            list[QuestModel]: List of all quest model instances.
+        """
+        return QuestRepository.get_quests(db)
 
     @staticmethod
     def create_quest(db: Session, quest_create: QuestCreate) -> QuestModel:

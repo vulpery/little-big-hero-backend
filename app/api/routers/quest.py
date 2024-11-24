@@ -12,7 +12,12 @@ router = APIRouter(
 )
 
 
-@router.post("/", response_model=QuestRead, summary="Create a new quest", description="Create a quest by providing details using the QuestCreate schema.")
+@router.post(
+    "/",
+    response_model=QuestRead,
+    summary="Create a new quest",
+    description="Create a quest by providing details using the QuestCreate schema.",
+)
 def create_quest(quest_create: QuestCreate, db: Session = Depends(get_db)):
     """
     **Create a new quest**.
@@ -27,7 +32,12 @@ def create_quest(quest_create: QuestCreate, db: Session = Depends(get_db)):
     return quest
 
 
-@router.get("/{quest_id}", response_model=QuestRead, summary="Retrieve quest details", description="Retrieve details of a specific quest by providing its UUID.")
+@router.get(
+    "/{quest_id}",
+    response_model=QuestRead,
+    summary="Retrieve quest details",
+    description="Retrieve details of a specific quest by providing its UUID.",
+)
 def read_quest(quest_id: str, db: Session = Depends(get_db)):
     """
     **Retrieve a quest by its ID**.
@@ -47,8 +57,32 @@ def read_quest(quest_id: str, db: Session = Depends(get_db)):
     return quest
 
 
-@router.put("/{quest_id}", response_model=QuestRead, summary="Update an existing quest", description="Update the details of a specific quest by providing its UUID and update data.")
-def update_quest(quest_id: str, quest_update: QuestUpdate, db: Session = Depends(get_db)):
+@router.get(
+    "/",
+    response_model=list[QuestRead],
+    summary="Retrieve all quests",
+    description="Retrieve details of all quests.",
+)
+def read_quests(db: Session = Depends(get_db)):
+    """
+    **Retrieve all quests**.
+
+    **Returns:**
+    - **list[QuestRead]** (*list[QuestRead]*): A list of all quests.
+    """
+    quests = QuestService.get_quests(db)
+    return quests
+
+
+@router.put(
+    "/{quest_id}",
+    response_model=QuestRead,
+    summary="Update an existing quest",
+    description="Update the details of a specific quest by providing its UUID and update data.",
+)
+def update_quest(
+    quest_id: str, quest_update: QuestUpdate, db: Session = Depends(get_db)
+):
     """
     **Update an existing quest**.
 
@@ -68,7 +102,12 @@ def update_quest(quest_id: str, quest_update: QuestUpdate, db: Session = Depends
     return quest
 
 
-@router.delete("/{quest_id}", response_model=dict, summary="Delete a quest", description="Delete a specific quest by providing its UUID.")
+@router.delete(
+    "/{quest_id}",
+    response_model=dict,
+    summary="Delete a quest",
+    description="Delete a specific quest by providing its UUID.",
+)
 def delete_quest(quest_id: str, db: Session = Depends(get_db)):
     """
     **Delete a quest by its ID**.
