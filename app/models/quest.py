@@ -9,6 +9,7 @@ from app.core.database import Base
 
 class QuestStatus(enum.Enum):
     available = "available"
+    accepted = "accepted"
     in_progress = "in_progress"
     completed = "completed"
     cancelled = "cancelled"
