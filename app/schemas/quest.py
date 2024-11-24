@@ -17,6 +17,7 @@ class QuestStatus(str, Enum):
         - cancelled
     """
     available = "available"
+    accepted = "accepted"
     in_progress = "in_progress"
     completed = "completed"
     cancelled = "cancelled"
